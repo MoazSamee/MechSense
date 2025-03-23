@@ -1,103 +1,226 @@
-import Image from "next/image";
 
-export default function Home() {
+import Link from "next/link"
+import { AlertTriangle, Battery, BatteryCharging, Car, Droplets, Gauge, MoreHorizontal, Wrench } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { StatusCard } from "@/components/status-card"
+import { NotificationBell } from "@/components/notification-bell"
+import { Progress } from "@/components/ui/progress"
+
+export default function DashboardPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col ml-60">
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-6">
+        <h1 className="text-xl font-semibold">Dashboard</h1>
+        <div className="ml-auto flex items-center gap-4">
+          <NotificationBell />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </header>
+      <div className="flex-1 space-y-6 p-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <StatusCard
+            title="Engine Status"
+            value="Normal"
+            icon={<Car className="h-4 w-4" />}
+            status="normal"
+            footer="Last checked: 5 minutes ago"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <StatusCard
+            title="Fuel Level"
+            value="68%"
+            icon={<Droplets className="h-4 w-4" />}
+            status="normal"
+            footer={
+              <div className="mt-2">
+                <Progress value={68} className="h-2" />
+                <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+                  <span>Range: ~280 miles</span>
+                  <span>12.5 gal</span>
+                </div>
+              </div>
+            }
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <StatusCard
+            title="Battery Health"
+            value="12.8V"
+            icon={<Battery className="h-4 w-4" />}
+            status="normal"
+            footer="Good condition"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <StatusCard
+            title="Tire Pressure"
+            value="Low"
+            icon={<Gauge className="h-4 w-4" />}
+            status="warning"
+            footer="Front left: 26 PSI (Low)"
+          />
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="col-span-1 lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Active Alerts</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 rounded-lg border p-3">
+                  <div className="rounded-full bg-amber-500/20 p-2 text-amber-500">
+                    <Gauge className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium">Low Tire Pressure</h3>
+                    <p className="text-sm text-muted-foreground">Front left tire pressure is low (26 PSI)</p>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/tire-pressure">View</Link>
+                  </Button>
+                </div>
+                <div className="flex items-center gap-4 rounded-lg border p-3">
+                  <div className="rounded-full bg-blue-500/20 p-2 text-blue-500">
+                    <Wrench className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium">Oil Change Due</h3>
+                    <p className="text-sm text-muted-foreground">Scheduled maintenance: Oil change due in 500 miles</p>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/maintenance">View</Link>
+                  </Button>
+                </div>
+                <div className="flex items-center gap-4 rounded-lg border p-3">
+                  <div className="rounded-full bg-destructive/20 p-2 text-destructive">
+                    <Battery className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium">Battery Warning</h3>
+                    <p className="text-sm text-muted-foreground">Battery voltage is low (11.8V)</p>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/battery-health">View</Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Quick Access</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-2">
+                <Button variant="outline" className="h-auto flex-col py-4 justify-start" asChild>
+                  <Link href="/vehicle-health">
+                    <Car className="mb-2 h-5 w-5" />
+                    <span>Vehicle Health</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto flex-col py-4 justify-start" asChild>
+                  <Link href="/maintenance">
+                    <Wrench className="mb-2 h-5 w-5" />
+                    <span>Maintenance</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto flex-col py-4 justify-start" asChild>
+                  <Link href="/fault-detection">
+                    <AlertTriangle className="mb-2 h-5 w-5" />
+                    <span>Fault Detection</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto flex-col py-4 justify-start" asChild>
+                  <Link href="/battery-health">
+                    <BatteryCharging className="mb-2 h-5 w-5" />
+                    <span>Battery Health</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="col-span-2 justify-between" asChild>
+                  <Link href="/notifications">
+                    <span>All Notifications</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Trips</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {[
+                  {
+                    date: "Today",
+                    from: "Home",
+                    to: "Office",
+                    distance: "12.5 miles",
+                    duration: "28 min",
+                  },
+                  {
+                    date: "Yesterday",
+                    from: "Office",
+                    to: "Home",
+                    distance: "13.2 miles",
+                    duration: "32 min",
+                  },
+                  {
+                    date: "Mar 15, 2024",
+                    from: "Home",
+                    to: "Shopping Mall",
+                    distance: "8.7 miles",
+                    duration: "22 min",
+                  },
+                  {
+                    date: "Mar 14, 2024",
+                    from: "Home",
+                    to: "Gym",
+                    distance: "5.3 miles",
+                    duration: "15 min",
+                  },
+                ].map((trip, i) => (
+                  <Card key={i} className="overflow-hidden">
+                    <CardHeader className="bg-primary/5 pb-2">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium">{trip.date}</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-4">
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium">From:</span>
+                          <span className="text-sm">{trip.from}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium">To:</span>
+                          <span className="text-sm">{trip.to}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium">Distance:</span>
+                          <span className="text-sm">{trip.distance}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium">Duration:</span>
+                          <span className="text-sm">{trip.duration}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                <Button variant="outline" asChild>
+                  <Link href="/trip-history">View All Trips</Link>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  );
+  )
 }
+
