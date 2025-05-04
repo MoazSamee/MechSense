@@ -38,7 +38,7 @@ export default function TirePressurePage() {
                   <div className="text-3xl font-bold text-amber-500">26 PSI</div>
                   <div className="mt-1 text-xs text-muted-foreground">Recommended: 32 PSI</div>
                 </div>
-                <Badge variant="outline" className="absolute -top-2 right-4 bg-amber-500/10 text-amber-500">
+                <Badge variant="outline" className="absolute -top-0 right-4 bg-amber-500/10 text-amber-500">
                   Low
                 </Badge>
               </div>
@@ -48,7 +48,7 @@ export default function TirePressurePage() {
                   <div className="text-3xl font-bold">32 PSI</div>
                   <div className="mt-1 text-xs text-muted-foreground">Recommended: 32 PSI</div>
                 </div>
-                <Badge variant="outline" className="absolute -top-2 right-4 bg-green-500/10 text-green-500">
+                <Badge variant="outline" className="absolute -top-0 right-4 bg-green-500/10 text-green-500">
                   Normal
                 </Badge>
               </div>
@@ -58,7 +58,7 @@ export default function TirePressurePage() {
                   <div className="text-3xl font-bold">33 PSI</div>
                   <div className="mt-1 text-xs text-muted-foreground">Recommended: 32 PSI</div>
                 </div>
-                <Badge variant="outline" className="absolute -top-2 right-4 bg-green-500/10 text-green-500">
+                <Badge variant="outline" className="absolute -top-0 right-4 bg-green-500/10 text-green-500">
                   Normal
                 </Badge>
               </div>
@@ -68,7 +68,7 @@ export default function TirePressurePage() {
                   <div className="text-3xl font-bold">32 PSI</div>
                   <div className="mt-1 text-xs text-muted-foreground">Recommended: 32 PSI</div>
                 </div>
-                <Badge variant="outline" className="absolute -top-2 right-4 bg-green-500/10 text-green-500">
+                <Badge variant="outline" className="absolute -top-0 right-4 bg-green-500/10 text-green-500">
                   Normal
                 </Badge>
               </div>
